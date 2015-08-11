@@ -10,10 +10,10 @@ namespace popcornpk.DataModel
         {
             public string id { get; set; }
             public string timing_title { get; set; }
-        }
-    public class Citys
-    {
-        public List<City> city { get; set; }
-    }
+            }
+        public class Citys
+        {
+            public List<City> city { get; set; }
+         }
 
 }

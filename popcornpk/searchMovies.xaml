@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="popcornpk.searchMovies"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:popcornpk"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" >
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="607"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Pivot x:Name="myPivot">
+            <PivotItem x:Name="pivot_item1" Header="by city" Margin="10,-76,28,-20.833">
+                <StackPanel Height="505">
+                    <Grid Margin="0,0,0,118" Height="514"  >
+                        <ListView  x:Name="listByCity" ItemsSource="{Binding}" Loaded="citys_loaded">
+
+                            <DataTemplate>
+                                <TextBlock x:Name="City" FontSize="14" Text="{Binding timing_title}"></TextBlock>
+                                
+                            </DataTemplate>
+                            
+                        </ListView>
+
+                    </Grid>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem x:Name="pivot_item2" Header="actors/actresses">
+                <StackPanel/>
+            </PivotItem>
+
+            <PivotItem x:Name="pivot_item3" Header="showtimes">
+                <StackPanel/>
+            </PivotItem>
+            <!-- Add more pivot items if your View calls for it -->
+        </Pivot>
+    </Grid>
+</Page>
+

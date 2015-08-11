@@ -13,23 +13,28 @@ namespace popcornpk.DataModel
     public class popcornpk_Dal
     {
 
-        public async void GetCityList()
+        public async Task<City> GetCityListAsync()
         {
 
 
 
 
-             
-            
+            var tcs = new TaskCompletionSource<City>();
+
+
             string jsonresult = await WCFRESTServiceCall("GET", "cinema_city");
 
-         var _citys = jsonresult.Deserialize<Citys>();
+            var list = await Task.Run(() => jsonresult.Deserialize<City>());
+            tcs.SetResult(list);
+
+            //Citys _citys = jsonresult.Deserialize<Citys>();
 
 
             var dialog = new MessageDialog(jsonresult);
             await dialog.ShowAsync();
-       
-    }
+
+            return await tcs.Task;
+        }
 
 
         /// <summary>
