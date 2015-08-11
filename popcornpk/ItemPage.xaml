@@ -1,0 +1,71 @@
+﻿<Page    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:popcornpk"
+    xmlns:data="using:popcornpk.Data"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Input="using:Telerik.UI.Xaml.Controls.Input" x:Name="pageRoot"
+    x:Class="popcornpk.ItemPage"
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Mode=Self}}"
+    d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+  Background="{ThemeResource HubBackgroundImageBrush}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <ContinuumNavigationTransitionInfo/>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid x:Name="LayoutRoot" >
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="607"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Pivot x:Name="myPivot">
+            <PivotItem x:Name="pivot_item1" Header="movie details" Margin="10,-76,28,-20.833">
+                <StackPanel Height="505">
+                    <Grid Margin="0,0,0,118" Height="514"  >
+                        <TextBlock FontSize="13" x:Name="txtTtile" Text="{Binding Title}" HorizontalAlignment="Left" Margin="150,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged"/>
+                        <Image Grid.Row="2" x:Name="image"  Source="{Binding ImagePath}" HorizontalAlignment="Left" Height="186" Margin="19,26,0,0" VerticalAlignment="Top" Width="112"/>
+                        <TextBlock    FontSize="13" x:Name="txtTtile_Copy" Text="{Binding Description}" HorizontalAlignment="Left" Margin="19,217,-28,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="371" Foreground="White" Height="140" SelectionChanged="txtTtile_SelectionChanged" SelectionHighlightColor="White"/>
+                        <TextBlock Grid.Row="2" FontSize="13" x:Name="txtTtile_Copy1" HorizontalAlignment="Left" Margin="19,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="SYNOPSIS"/>
+
+                        <TextBlock FontSize="13" x:Name="lblrating" HorizontalAlignment="Left" Margin="19,362,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="Rating"/>
+                        <TextBlock FontSize="13" x:Name="lblduration" HorizontalAlignment="Left" Margin="19,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="Duration"/>
+                        <TextBlock FontSize="13" x:Name="txtCategory" HorizontalAlignment="Left" Margin="177,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="Category"/>
+
+                        <TextBlock FontSize="13" x:Name="lblcategory" HorizontalAlignment="Left" Margin="248,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="{Binding Category}"/>
+                        <TextBlock FontSize="13" x:Name="txtduration" HorizontalAlignment="Left" Margin="76,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="{Binding Duration}"/>
+
+                        <Input:RadRating   Value="5" HorizontalAlignment="Left" Margin="18,367,0,0" VerticalAlignment="Top" Foreground="#FFDEC62D">
+                            <Input:RadRating.EmptyIconContentTemplate>
+                                <DataTemplate>
+                                    <SymbolIcon Symbol="SolidStar" Foreground="Gold" Margin="0,3,0,0" />
+                                </DataTemplate>
+                            </Input:RadRating.EmptyIconContentTemplate>
+                        </Input:RadRating>
+
+<Button x:Name="btnTestWeb" Content="Test WebService" Tapped="Button_Tapped" Margin="99,347,0,110"/>
+                    </Grid>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem x:Name="pivot_item2" Header="actors/actresses">
+                <StackPanel/>
+            </PivotItem>
+
+            <PivotItem x:Name="pivot_item3" Header="showtimes">
+                <StackPanel/>
+            </PivotItem>
+            <!-- Add more pivot items if your View calls for it -->
+        </Pivot>
+
+    </Grid>
+</Page>
