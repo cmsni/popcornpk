@@ -40,12 +40,12 @@ namespace popcornpk
             {
                 popcornpk_Dal popcorn_dal = new popcornpk_Dal();
 
-               City _mycitys = await popcorn_dal.GetCityListAsync();
+              List<City> _mycitys = await popcorn_dal.GetCityListAsync();
 
             
                 var listView = (ListView)sender;
 
-                listView.ItemsSource = _mycitys.ToString();
+            listView.ItemsSource = _mycitys.ToList();
             }
     }
 }

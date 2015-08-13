@@ -89,7 +89,7 @@
     <Compile Include="DataModel\Category.cs" />
     <Compile Include="DataModel\City.cs" />
     <Compile Include="DataModel\CommingSoon.cs" />
-    <Compile Include="DataModel\MoviesList.cs" />
+    <Compile Include="DataModel\MovieDetail.cs" />
     <Compile Include="DataModel\popcornpk_Dal.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="DataModel\Theater.cs" />

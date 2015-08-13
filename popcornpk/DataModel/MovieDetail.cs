@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace popcornpk.DataModel
 {
-    public class MovieList
+     public class MovieDetail
     {
         public string id { get; set; }
         public string name { get; set; }
@@ -37,10 +37,12 @@ namespace popcornpk.DataModel
         public string videos { get; set; }
         public string comming_soon { get; set; }
         public string avg { get; set; }
-    }
+     }
 
-    public class MovieLists
-    {
-        public List<MovieList> movie_list { get; set; }
+     public class MovieDetails
+     {
+        public List<MovieDetail> movieDetaillist { get; set; }
+
+ 
     }
 }

@@ -13,29 +13,74 @@ namespace popcornpk.DataModel
     public class popcornpk_Dal
     {
 
-        public async Task<City> GetCityListAsync()
+        //public async Task<City> GetCityListAsync()
+        //{
+
+
+
+
+        //    var tcs = new TaskCompletionSource<City>();
+
+
+        //    string jsonresult = await WCFRESTServiceCall("GET", "cinema_city");
+
+        //    var list = await Task.Run(() => jsonresult.Deserialize<City>());
+        //    tcs.SetResult(list);
+
+        //    //Citys _citys = jsonresult.Deserialize<Citys>();
+
+
+        //    var dialog = new MessageDialog(jsonresult);
+        //    await dialog.ShowAsync();
+
+        //    return await tcs.Task;
+        //}
+
+        public async Task<List<City>> GetCityListAsync()
         {
 
-
-
-
-            var tcs = new TaskCompletionSource<City>();
-
-
+            var tcs = new TaskCompletionSource<List<City>>();
             string jsonresult = await WCFRESTServiceCall("GET", "cinema_city");
 
-            var list = await Task.Run(() => jsonresult.Deserialize<City>());
-            tcs.SetResult(list);
-
-            //Citys _citys = jsonresult.Deserialize<Citys>();
-
-
+            var list = await Task.Run(() => jsonresult.Deserialize<Citys>());
+            tcs.SetResult(list.city);
+            // for testing to show json being returned
             var dialog = new MessageDialog(jsonresult);
             await dialog.ShowAsync();
 
             return await tcs.Task;
         }
 
+
+        //public async Task<List<MovieDetail>> GetMovieDetailsList(int movieId)
+        //{
+
+        //    var tcs = new TaskCompletionSource<List<MovieDetail>>();
+        //    string jsonresult = await WCFRESTServiceCall("GET", "movie_details");
+
+        //    var list = await Task.Run(() => jsonresult.Deserialize<MovieDetails>());
+        //    tcs.SetResult(list.movieDetaillist);
+        //    // for testing to show json being returned
+        //    var dialog = new MessageDialog(jsonresult);
+        //    await dialog.ShowAsync();
+
+        //    return await tcs.Task;
+        //}
+
+        public async Task<List<MovieDetail>> GetMovieDetailsList(int movieId)
+        {
+            string jsonresult = await WCFRESTServiceCall("GET", "movie_details");
+            var list = jsonresult.Deserialize<MovieDetails>();
+            return list.movieDetaillist;
+        }
+
+
+        public async Task<List<MovieDetail>> searchMovies(string movietitle)
+        {
+            List<MovieDetail> _myMovie = await GetMovieDetailsList(1);
+            var list = _myMovie.Where(p => p.name == movietitle).ToList();
+            return list;
+        }
 
         /// <summary>
         /// Utility function to get/post WCFRESTService

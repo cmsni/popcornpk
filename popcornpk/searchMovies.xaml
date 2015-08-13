@@ -23,7 +23,7 @@
             <PivotItem x:Name="pivot_item1" Header="by city" Margin="10,-76,28,-20.833">
                 <StackPanel Height="505">
                     <Grid Margin="0,0,0,118" Height="514"  >
-                        <ListView  x:Name="listByCity" ItemsSource="{Binding}" Loaded="citys_loaded">
+                        <ListView    x:Name="listByCity" ItemsSource="{Binding}" Loaded="citys_loaded">
 
                             <DataTemplate>
                                 <TextBlock x:Name="City" FontSize="14" Text="{Binding timing_title}"></TextBlock>

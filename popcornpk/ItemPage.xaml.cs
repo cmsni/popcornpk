@@ -125,7 +125,7 @@ namespace popcornpk
 
 
            
-          City _citys = await  popcorn_dal.GetCityListAsync();
+          List<City> _mylist= await  popcorn_dal.GetCityListAsync();
 
         }
     }
