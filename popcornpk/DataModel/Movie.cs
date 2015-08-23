@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace popcornpk.DataModel
 {
-    public class MovieDetails
-    {
+      public class Movie
+     {
         public string id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
@@ -36,25 +36,12 @@ namespace popcornpk.DataModel
         public string videous { get; set; }
         public string videos { get; set; }
         public string comming_soon { get; set; }
-        public int avg { get; set; }
-        public string movie_details_url { get; set; }
-    }
+        public string avg { get; set; }
+     }
 
-    public class FetchTiming
-    {
-        public string id { get; set; }
-        public string theater_name { get; set; }
-        public string address { get; set; }
-        public List<string> show_times { get; set; }
-        public string screen_id { get; set; }
-        public string title { get; set; }
-    }
-
-    public class MovieDetail
-    {
-        public MovieDetails movie_details { get; set; }
-        public List<FetchTiming> fetch_timing { get; set; }
-    }
-
-
+     public class MovieList
+     {
+        public List<Movie> movie_list { get; set; }
+     }
+  
 }

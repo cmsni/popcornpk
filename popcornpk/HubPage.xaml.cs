@@ -1,5 +1,6 @@
 ﻿using popcornpk.Common;
 using popcornpk.Data;
+using popcornpk.DataModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +46,8 @@ namespace popcornpk
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            
         }
 
         /// <summary>
@@ -98,36 +101,24 @@ namespace popcornpk
         /// <summary>
         /// Shows the details of a clicked group in the <see cref="SectionPage"/>.
         /// </summary>
-        private void GroupSection_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
+//        private void GroupSection_ItemClick(object sender, ItemClickEventArgs e)
+//        {
+//            var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
 
-            if (groupId == "search")
-                Frame.Navigate(typeof(searchMovies), groupId);
+//            if (groupId == "search")
+//            {
+//                Frame.Navigate(typeof(searchMovies), groupId);
+//            }else
+//                Frame.Navigate(typeof(ItemPage),groupId);
 
-//            if (!Frame.Navigate(typeof(SectionPage), groupId))
-  //          {
-    //            throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-      //      }
-        }
 
-        /// <summary>
-        /// Shows the details of an item clicked on in the <see cref="ItemPage"/>
-        /// </summary>
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+////            if (!Frame.Navigate(typeof(SectionPage), groupId))
+//  //          {
+//    //            throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+//      //      }
+//        }
 
-            if (itemId == "Search")
-                Frame.Navigate(typeof(searchMovies), itemId);
-//
-  //                  if (!Frame.Navigate(typeof(ItemPage), itemId))
-    //        {
-      //          throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-        //    }
-        }
+      
 
         #region NavigationHelper registration
 
@@ -154,5 +145,63 @@ namespace popcornpk
         }
 
         #endregion
+
+    
+ 
+ 
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+            // Navigate to the appropriate destination page, configuring the new page
+            // by passing required information as a navigation parameter
+            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+
+            if (itemId == "Search")
+                Frame.Navigate(typeof(searchMovies), itemId);
+
+            if (itemId == "Settings")
+                Frame.Navigate(typeof(Settings), itemId);
+        }
+
+      
+
+  
+        private async void movieListView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            ProgressRing pr = new ProgressRing();
+            pr.IsActive = true;
+
+            popcornpk_Dal popcorn_dal = new popcornpk_Dal();
+
+
+            MovieList movieList = await popcorn_dal.GetAllMovies();
+            var listView = (ListView)sender;
+
+            listView.ItemsSource = movieList.movie_list;
+
+            pr.IsActive = false;
+
+        }
+
+        private void movieListView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            
+        }
+
+        private void movieListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = sender as ListView;
+            Movie moveInfoSelected = listView.SelectedItem as Movie;
+            Frame.Navigate(typeof(movieInfo), moveInfoSelected);
+ 
+ 
+        
+        }
+
+       
+ 
+
+       
     }
 }

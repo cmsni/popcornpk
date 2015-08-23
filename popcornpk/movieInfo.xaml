@@ -5,8 +5,8 @@
     xmlns:data="using:popcornpk.Data"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Input="using:Telerik.UI.Xaml.Controls.Input" x:Name="pageRoot"
-    x:Class="popcornpk.ItemPage"
+    x:Name="pageRoot"
+    x:Class="popcornpk.movieInfo"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Mode=Self}}"
     d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=/DataModel/SampleData.json, Type=data:SampleDataSource}}"
@@ -18,7 +18,6 @@
             </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
-
     <Grid x:Name="LayoutRoot" >
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -32,6 +31,8 @@
         <Pivot x:Name="myPivot">
             <PivotItem x:Name="pivot_item1" Header="movie details" Margin="10,-76,28,-20.833">
                 <StackPanel Height="505">
+                    <ProgressRing Name="BusyProgressRing" IsActive="False"></ProgressRing>
+
                     <Grid Margin="0,0,0,118" Height="514"  >
                         <TextBlock FontSize="13" x:Name="txtTtile" Text="{Binding Title}" HorizontalAlignment="Left" Margin="150,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged"/>
                         <Image Grid.Row="2" x:Name="image"  Source="{Binding ImagePath}" HorizontalAlignment="Left" Height="186" Margin="19,26,0,0" VerticalAlignment="Top" Width="112"/>
@@ -45,16 +46,8 @@
                         <TextBlock FontSize="13" x:Name="lblcategory" HorizontalAlignment="Left" Margin="248,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="{Binding Category}"/>
                         <TextBlock FontSize="13" x:Name="txtduration" HorizontalAlignment="Left" Margin="76,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Foreground="White" Height="29" SelectionChanged="txtTtile_SelectionChanged" Text="{Binding Duration}"/>
 
-                        <Input:RadRating   Value="5" HorizontalAlignment="Left" Margin="18,367,0,0" VerticalAlignment="Top" Foreground="#FFDEC62D">
-                            <Input:RadRating.EmptyIconContentTemplate>
-                                <DataTemplate>
-                                    <SymbolIcon Symbol="SolidStar" Foreground="Gold" Margin="0,3,0,0" />
-                                </DataTemplate>
-                            </Input:RadRating.EmptyIconContentTemplate>
-                        </Input:RadRating>
-
-<Button x:Name="btnTestWeb" Content="Test WebService" Tapped="Button_Tapped" Margin="99,347,0,110"/>
-                    </Grid>
+              
+                </Grid>
                 </StackPanel>
             </PivotItem>
             <PivotItem x:Name="pivot_item2" Header="actors/actresses">
@@ -68,4 +61,5 @@
         </Pivot>
 
     </Grid>
+ 
 </Page>
